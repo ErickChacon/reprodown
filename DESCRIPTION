@@ -1,0 +1,18 @@
+Package: reprodown
+Title: Reproducible Projects with R Markdown and Hugo
+Version: 0.1
+Date: 2020-05-23
+Authors@R:
+    person(given = "Erick",
+           family = "Chacón-Montalván",
+           role = c("aut", "cre"),
+           email = "e.chaconmontalvan@lancaster.ac.uk",
+           comment = c(ORCID = "0000-0001-8068-1034"))
+Description: Tools to improve reproducibility of your project and to create a custom
+    website of this. It integrates blogdown (a package to create websites using Hugo
+    and R Markdown) with Makefile (GNU make software to automatise compilation).
+License: GPL (>= 2) | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: blogdown
+RoxygenNote: 7.0.2
