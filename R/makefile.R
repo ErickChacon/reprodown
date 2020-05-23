@@ -22,7 +22,7 @@
 #'
 #' @export
 prepare_yaml <- function(file_rmd, dir_blog = "docs") {
-    target_html <- sub("^scripts", file.path(dir_blog, "contents"), file_rmd)
+    target_html <- sub("^scripts", file.path(dir_blog, "content"), file_rmd)
     target_html <- sub(".Rmd$", ".html", target_html)
 
     yaml_list <- blogdown:::split_yaml_body(blogdown:::fetch_yaml2(file_rmd))$yaml_list
