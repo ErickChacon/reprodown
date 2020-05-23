@@ -87,15 +87,15 @@ make_dependency <- function(yaml_list) {
 #' The prerequisites and targets of a Rmd files are defined on the yaml header using
 #' parameters starting with "prer" or "targ" respectively. It is not required to put
 #' the obvious prerequisite (the same Rmd file) and the obvious target (the
-#' associated html file). An example is below:
-#' ---
-#' title: Causal Analysis of COVID-19
-#' prerequisites:
-#'      - data/counts.RData
-#'      - data/transportation.RData
-#' targets:
-#'      - data/model/spatial.RData
-#'      - data/model/global.RData
+#' associated html file). An example of a yaml header is below:\cr
+#' ---\cr
+#' title: Causal Analysis of COVID-19\cr
+#' prerequisites:\cr
+#'      - data/counts.RData\cr
+#'      - data/transportation.RData\cr
+#' targets:\cr
+#'      - data/model/spatial.RData\cr
+#'      - data/model/global.RData\cr
 #' ---
 #'
 #' @param dir_src Directory path of the Rmd scripts.
@@ -129,7 +129,7 @@ makefile <- function(dir_src = "scripts", dir_blog = "docs",
         paste("targets_all =", paste(targets_all, collapse = " \\\n\t"))
     make_var_clean <-
         paste("targets_clean =", paste(targets_clean, collapse = " \\\n\t"))
-    make_rule_all <- "all: $(target_all)"
+    make_rule_all <- "all: $(targets_all)"
     make_dependencies <- unlist(lapply(yamls, make_dependency))
     make_recipe_all <-
         paste0("$(target_all):\n\t", "@Rscript -e ",

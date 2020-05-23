@@ -24,15 +24,15 @@ on the yaml header of Rmd scripts.
 The prerequisites and targets of a Rmd files are defined on the yaml header using
 parameters starting with "prer" or "targ" respectively. It is not required to put
 the obvious prerequisite (the same Rmd file) and the obvious target (the
-associated html file). An example is below:
----
-title: Causal Analysis of COVID-19
-prerequisites:
-     - data/counts.RData
-     - data/transportation.RData
-targets:
-     - data/model/spatial.RData
-     - data/model/global.RData
+associated html file). An example of a yaml header is below:\cr
+---\cr
+title: Causal Analysis of COVID-19\cr
+prerequisites:\cr
+     - data/counts.RData\cr
+     - data/transportation.RData\cr
+targets:\cr
+     - data/model/spatial.RData\cr
+     - data/model/global.RData\cr
 ---
 }
 \author{
