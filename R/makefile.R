@@ -120,21 +120,21 @@ makefile <- function(dir_src = "scripts", dir_blog = "docs",
     yamls <- yamls[!ignore]
 
     # targets
-    targets_all <- lapply(yamls, function(x) x[[grep("^targ", names(x))]])
-    targets_all <- unique(unlist(targets_all))
-    targets_clean <- grep(".html$", targets_all, value = TRUE)
+    target_all <- lapply(yamls, function(x) x[[grep("^targ", names(x))]])
+    target_all <- unique(unlist(target_all))
+    target_clean <- grep(".html$", target_all, value = TRUE)
 
     # makefile body
     make_var_all <-
-        paste("targets_all =", paste(targets_all, collapse = " \\\n\t"))
+        paste("target_all =", paste(target_all, collapse = " \\\n\t"))
     make_var_clean <-
-        paste("targets_clean =", paste(targets_clean, collapse = " \\\n\t"))
-    make_rule_all <- "all: $(targets_all)"
+        paste("target_clean =", paste(target_clean, collapse = " \\\n\t"))
+    make_rule_all <- "all: $(target_all)"
     make_dependencies <- unlist(lapply(yamls, make_dependency))
     make_recipe_all <-
         paste0("$(target_all):\n\t", "@Rscript -e ",
                "\'blogdown:::build_rmds(\"$(<D)/$(<F)\", \"docs\", \"scripts\")\'")
-    make_rule_clean <- paste("clean:", "rm -f $(targets_clean)", sep = "\n\t")
+    make_rule_clean <- paste("clean:", "rm -f $(target_clean)", sep = "\n\t")
 
     # write makefile
     makefile <- file("Makefile")
