@@ -1,0 +1,14 @@
+- data:
+    - raw
+    - cleaned
+    - processed
+    - modelled
+- src
+- scripts:
+    - 10-extract
+    - 20-clean
+    - 30-process
+    - 40-explore
+    - 50-model
+    - 60-summarise
+- docs
