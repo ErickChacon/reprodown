@@ -43,3 +43,21 @@ create_proj <- function(dir = getwd(), yaml_file = system.file("reprodown.yaml",
         lapply(paths, function(x) create_file(x, showWarnings = TRUE))
     }
 }
+
+#' @title Create gitlab continuous integration example
+#'
+#' @description
+#' \code{create_gitlab_ci} creates an examples of a continuous integration file using
+#' gitlab.
+#'
+#' @param par.
+#'
+#' @return NULL.
+#'
+#' @author Erick A. Chacón-Montalván
+#'
+#' @export
+create_gitlab_ci <- function () {
+    file.copy(system.file(".gitlab-ci.yml", package = "reprodown"), getwd())
+}
+
