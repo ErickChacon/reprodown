@@ -107,8 +107,7 @@ make_dependency <- function(yaml_list) {
 #' @author Erick A. Chacón-Montalván
 #'
 #' @export
-makefile <- function(dir_src = "scripts", dir_blog = "docs",
-                     command = "") {
+makefile <- function(dir_src = "scripts", dir_blog = "docs", command = "", test = NULL) {
 
     # find all rmds files
     files <- blogdown:::list_rmds(dir_src, check = FALSE)
@@ -131,9 +130,21 @@ makefile <- function(dir_src = "scripts", dir_blog = "docs",
         paste("target_clean =", paste(target_clean, collapse = " \\\n\t"))
     make_rule_all <- "all: $(target_all)"
     make_dependencies <- unlist(lapply(yamls, make_dependency))
-    make_recipe_all <-
-        paste0("$(target_all):\n\t", "@Rscript -e ",
-               "\'blogdown:::build_rmds(\"$(<D)/$(<F)\", \"docs\", \"scripts\")\'")
+    if (!is.null(test)) {
+        make_recipe_all <- "$(target_all):"
+        if ("tar" %in% test) {
+            make_recipe_all <-
+                paste(make_recipe_all, '@echo \"target          ---> $@\"', sep = "\n\t")
+        }
+        if ("pre" %in% test) {
+            make_recipe_all <-
+                paste(make_recipe_all, '@echo \"prerequisites   ---> $^\"', sep = "\n\t")
+        }
+    } else {
+        make_recipe_all <-
+            paste0("$(target_all):\n\t", "@Rscript -e ",
+                   "\'blogdown:::build_rmds(\"$(<D)/$(<F)\", \"docs\", \"scripts\")\'")
+    }
     make_rule_clean <- paste("clean:", "rm -f $(target_clean)", sep = "\n\t")
 
     # write makefile
